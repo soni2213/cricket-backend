@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         post :record_score
         post :record_toss
         get :retrieve_score
+        post :match_winner
       end
     end
   end

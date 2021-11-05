@@ -14,10 +14,8 @@ module Api
     end
 
     def retrieve_score
-      if Match.find(fetch_score_params).winner
-        { score: total_score, wickets: total_wickets}
-      else
-      end
+      match = Match.find(params[:id])
+      Match::Summary.new(match).print
     end
 
     def match_winner
@@ -40,25 +38,8 @@ module Api
       params.permit(:toss_winner_id)
     end
 
-    def fetch_score_params
-      params.permit(:match_id)
-    end
-
     def winner_params
       params.permit(:winner_id)
-    end
-
-    def player_ids
-      team = Team.find(params[:team_id])
-      team.players.pluck(:id)
-    end
-
-    def total_score
-      Ball.where(batsman_id: player_ids).sum(:score)
-    end
-
-    def total_wickets
-      Wicket.where(batsman_id: player_ids).count
     end
   end
 end

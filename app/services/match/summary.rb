@@ -1,0 +1,64 @@
+module Match
+  class Summary
+    attr_reader :match,
+                :team1,
+                :team2
+
+    def initialize(match)
+      @match = match
+      @team1 = match.toss_winner
+      @team2 = match.toss_loser
+    end
+
+    def print
+      if match.in_progress?
+        print_brief
+      else
+        print_summary
+      end
+    end
+
+    private
+
+    def print_brief
+      brief = {}
+      brief[team1.name] = team_brief(team1)
+      brief[team2.name] = team_brief(team2)
+      brief
+    end
+
+    def print_summary
+      summary = {}
+      summary[:brief] = print_brief
+      summary[team1.name] = team_summary(team1)
+      summary[team2.name] = team_summary(team2)
+      summary
+    end
+
+    def team_brief(team)
+      score = match.balls.where(batsman_id: team.player_ids).sum(:score)
+      wickets = match.wickets.where(batsman_id: team.player_ids).count
+      "#{score} / #{wickets}"
+    end
+
+    def team_summary(team)
+      summary = {}
+      team.players.each do |player|
+        summary[player.name] = player_summary(player)
+      end
+      summary
+    end
+
+    def player_summary(player)
+      summary = {}
+      summary[:runs] = match.balls.where(batsman_id: player.id).sum(:score)
+      summary[:balls_played] = match.balls.where(batsman_id: player.id, extra: false).count
+      summary[:wicket_taker] = match.wickets.find_by(batsman_id: player.id)&.bowler_name
+      summary
+    end
+
+    def overs_played(team)
+      match.balls.where(extra: false, player_id: team.player_ids).count / 6
+    end
+  end
+end
