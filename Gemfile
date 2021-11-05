@@ -9,6 +9,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma'
 gem 'rack-cors'
 gem 'rails'
+gem 'jbuilder'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
