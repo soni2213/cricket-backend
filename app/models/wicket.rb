@@ -26,6 +26,6 @@ class Wicket < ApplicationRecord
   def bowler_fielder_team
     return if fielder.team_id == bowler.team_id
 
-    errors.add(:base, "Fielder and bowler can't be of same team")
+    errors.add(:base, "Fielder and bowler should be of same team")
   end
 end

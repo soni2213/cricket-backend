@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_155209) do
     t.integer "team2_id", null: false
     t.integer "winner_id"
     t.integer "toss_winner_id"
+    t.string "status", default: "planned"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["team1_id"], name: "index_matches_on_team1_id"
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_155209) do
     t.bigint "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_players_on_name", unique: true
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_155209) do
     t.string "name", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_teams_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
