@@ -12,7 +12,8 @@ describe RegistrationsController, type: :request do
       post signup_url, params: {
         user: {
           email: user.email,
-          password: user.password
+          password: user.password,
+          password_confirmation: user.password
         }
       }
     end
@@ -35,7 +36,8 @@ describe RegistrationsController, type: :request do
       post signup_url, params: {
         user: {
           email: existing_user.email,
-          password: existing_user.password
+          password: existing_user.password,
+          password_confirmation: existing_user.password
         }
       }
     end

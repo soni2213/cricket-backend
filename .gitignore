@@ -1,3 +1,5 @@
+
+
 # Ignore bundler config.
 /.bundle
 /.env
@@ -34,3 +36,5 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+rspec_status.txt
