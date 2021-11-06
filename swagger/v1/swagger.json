@@ -28,16 +28,24 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
+                  "user": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "email",
+                      "password"
+                    ]
                   }
                 },
                 "required": [
-                  "email",
-                  "password"
+                  "user"
                 ]
               }
             }
@@ -76,16 +84,24 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "email": {
-                      "type": "string"
+                    "resource": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "email": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "email"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "email"
+                    "resource"
                   ]
                 }
               }
@@ -93,9 +109,6 @@
           },
           "404": {
             "description": "user not found"
-          },
-          "406": {
-            "description": "unsupported accept header"
           }
         }
       }

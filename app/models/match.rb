@@ -1,6 +1,6 @@
 class Match < ApplicationRecord
 
-  TOTAL_BALLS = 2
+  TOTAL_BALLS = 120
   STATUSES = %w[planned toss in_progress completed]
 
   belongs_to :team1, class_name: 'Team', foreign_key: 'team1_id'
