@@ -12,6 +12,7 @@ class Match < ApplicationRecord
   has_many :wickets, through: :balls, dependent: :destroy
 
   validates :status, inclusion: STATUSES
+  validates :status, presence: true
   validate :team_duplicacy, :toss_winner_team, :winner_team
 
   def toss_loser

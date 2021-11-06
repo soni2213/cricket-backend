@@ -9,6 +9,7 @@ class Player < ApplicationRecord
   private
 
   def team_size
+    return unless team
     return if team.players.count < 11
 
     errors.add(:base, "Team can't have more than 11 players")

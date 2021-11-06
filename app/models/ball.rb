@@ -3,9 +3,9 @@ class Ball < ApplicationRecord
   scope :not_extra, -> { where(extra: false) }
   scope :played_by_team, -> (team){ not_extra.where(batsman_id: team.player_ids) }
 
+  belongs_to :match
   belongs_to :batsman, class_name: 'Player', foreign_key: 'batsman_id'
   belongs_to :bowler, class_name: 'Player', foreign_key: 'bowler_id'
-  belongs_to :match
 
   has_one :wicket, autosave: true, dependent: :destroy
 
@@ -37,6 +37,8 @@ class Ball < ApplicationRecord
   end
 
   def max_balls_per_team_in_match
+    return unless match
+
     max_balls = Match::TOTAL_BALLS
     # if team1 is batting and has exhausted max no. of balls permitted and this new record is for team1 only,
     # similar OR for team2
@@ -47,7 +49,7 @@ class Ball < ApplicationRecord
   end
 
   def bowler_batsman_team
-    return if bowler.team_id != batsman.team_id
+    return if bowler&.team_id != batsman&.team_id
 
     errors.add(:base, "Bowler and batsman can't be of same team")
   end
