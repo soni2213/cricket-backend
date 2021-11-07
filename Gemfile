@@ -18,6 +18,7 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
   gem 'pry'
+  gem 'rspec'
   gem 'rspec-rails'
 end
 
