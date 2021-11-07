@@ -9,6 +9,7 @@ November 7, 2021
 
 ### Location of deployed application
 https://cricket-score-recorder.herokuapp.com
+The application is API only, so there ain't any homepage there.
 
 ### Time spent
 6 hrs
@@ -25,13 +26,16 @@ https://cricket-score-recorder.herokuapp.com
 ### Instructions to run assignment locally
 1. clone the repo
 2. Confirm db config in config/database.yml
+3. Add `.env` file in your root folder. There's a sample `.env.example` file.
 3. Do a `bundle install`
 4. Seed some data in DB using `bundle exec rake db:create db:migrate db:seed`
 5. Play along with the [postman collection](https://www.getpostman.com/collections/92f716c4fa7fd631d7e1)
 6. run `bundle exec rspec` to run the test suite, and update `swagger` docs.
+7. Swagger documentation could be accessed at `http://localhost:3000/api-docs`
 
 ### What did you not include in your solution that you want us to know about
 1. Stretch goals
+2. Swagger documentation is accessible only on localhost, and not on the herokuapp, it was causing certain problems with the deployment.
 
 ### Plans for improvements
 1. Add proper validations.
