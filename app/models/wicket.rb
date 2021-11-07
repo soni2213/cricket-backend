@@ -7,7 +7,7 @@ class Wicket < ApplicationRecord
 
   validates :wicket_type, presence: true
   validate :batsman_fielder_team, :bowler_fielder_team, if: :fielder_present?
-  validate :max_wickets
+  validate :max_wickets, :fielder_presence
 
   def bowler_name
     bowler&.name
@@ -36,6 +36,13 @@ class Wicket < ApplicationRecord
     return unless ball.match.wickets.where(batsman_id: batsman.team.player_ids).size >= 10
 
     errors.add(:batsman, 'Max of 10 wickets per team')
+  end
+
+  def fielder_presence
+    return if fielder_id.blank?
+    return if fielder.present?
+
+    errors.add(:fielder, 'is invalid')
   end
 end
 

@@ -3,10 +3,10 @@
 module Api
   class MatchesController < Api::BaseController
     skip_before_action :authenticate_user!, only: %i[summary]
-    before_action :set_match
+    before_action :set_match, except: :create
 
-    def record_toss
-      @match.update!(toss_params)
+    def create
+      Match.create!(match_params)
     end
 
     def record_score
@@ -27,6 +27,11 @@ module Api
 
     private
 
+    def match_params
+      params.permit(:team1_id, :team2_id, :toss_winner_id)
+            .merge(status: :toss)
+    end
+
     def set_match
       @match = Match.find(params[:id])
     end
@@ -38,11 +43,6 @@ module Api
                     :fielder_id,
                     :score,
                     :extra)
-    end
-
-    def toss_params
-      params.permit(:toss_winner_id)
-            .merge(status: 'toss')
     end
 
     def winner_params

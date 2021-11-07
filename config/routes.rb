@@ -9,13 +9,13 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: { format: :json } do
-    resources :users, only: %w[show]
-    resources :matches, only: [] do
+    resources :users, only: %i[show]
+    resources :teams, only: %i[show]
+    resources :matches, only: %i[create] do
       member do
         post :record_score
-        post :record_toss
-        post :record_winner
-        post :update_match_status
+        put :record_winner
+        put :update_match_status
         get  :summary
       end
     end

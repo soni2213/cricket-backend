@@ -6,7 +6,7 @@ class Match < ApplicationRecord
   belongs_to :team1, class_name: 'Team', foreign_key: 'team1_id'
   belongs_to :team2, class_name: 'Team', foreign_key: 'team2_id'
   belongs_to :winner, class_name: 'Team', foreign_key: 'winner_id', optional: true
-  belongs_to :toss_winner, class_name: 'Team', foreign_key: 'toss_winner_id', optional: true
+  belongs_to :toss_winner, class_name: 'Team', foreign_key: 'toss_winner_id'
 
   has_many :balls, dependent: :destroy
   has_many :wickets, through: :balls, dependent: :destroy
@@ -36,7 +36,7 @@ class Match < ApplicationRecord
   end
 
   def toss_winner_team
-    return if [nil, team1_id, team2_id].include?(toss_winner_id)
+    return if [team1_id, team2_id].include?(toss_winner_id)
 
     errors.add(:toss_winner, "Must either be team1 or team2")
   end
