@@ -1,5 +1,6 @@
-class Wicket < ApplicationRecord
+# frozen_string_literal: true
 
+class Wicket < ApplicationRecord
   belongs_to :batsman, class_name: 'Player', foreign_key: 'batsman_id'
   belongs_to :bowler, class_name: 'Player', foreign_key: 'bowler_id'
   belongs_to :fielder, class_name: 'Player', foreign_key: 'fielder_id', optional: true
@@ -28,7 +29,7 @@ class Wicket < ApplicationRecord
   def bowler_fielder_team
     return if fielder.team_id == bowler.team_id
 
-    errors.add(:base, "Fielder and bowler should be of same team")
+    errors.add(:base, 'Fielder and bowler should be of same team')
   end
 
   def max_wickets

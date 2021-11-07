@@ -1,7 +1,8 @@
-class Match < ApplicationRecord
+# frozen_string_literal: true
 
+class Match < ApplicationRecord
   TOTAL_BALLS = 120
-  STATUSES = %w[planned toss in_progress completed]
+  STATUSES = %w[planned toss in_progress completed].freeze
 
   belongs_to :team1, class_name: 'Team', foreign_key: 'team1_id'
   belongs_to :team2, class_name: 'Team', foreign_key: 'team2_id'
@@ -32,19 +33,19 @@ class Match < ApplicationRecord
   def team_duplicacy
     return unless team1 == team2
 
-    errors.add(:base, "Both teams need to be different.")
+    errors.add(:base, 'Both teams need to be different.')
   end
 
   def toss_winner_team
     return if [team1_id, team2_id].include?(toss_winner_id)
 
-    errors.add(:toss_winner, "Must either be team1 or team2")
+    errors.add(:toss_winner, 'Must either be team1 or team2')
   end
 
   def winner_team
     return if [nil, team1_id, team2_id].include?(winner_id)
 
-    errors.add(:winner, "Must either be team1 or team2")
+    errors.add(:winner, 'Must either be team1 or team2')
   end
 end
 

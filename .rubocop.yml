@@ -12,3 +12,9 @@ Style/Documentation:
 
 Metrics/BlockLength:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false

@@ -1,7 +1,8 @@
-class Ball < ApplicationRecord
+# frozen_string_literal: true
 
+class Ball < ApplicationRecord
   scope :not_extra, -> { where(extra: false) }
-  scope :played_by_team, -> (team){ not_extra.where(batsman_id: team.player_ids) }
+  scope :played_by_team, ->(team) { not_extra.where(batsman_id: team.player_ids) }
 
   belongs_to :match
   belongs_to :batsman, class_name: 'Player', foreign_key: 'batsman_id'
@@ -18,6 +19,7 @@ class Ball < ApplicationRecord
   validate :max_balls_per_team_in_match, :bowler_batsman_team
 
   attr_accessor :wicket_type, :fielder_id
+
   before_create :record_wicket
 
   delegate :team1, :team1_id, :team2, :team2_id, :toss_winner, to: :match
@@ -28,10 +30,10 @@ class Ball < ApplicationRecord
   def record_wicket
     return unless wicket_type.present?
 
-    self.build_wicket(bowler_id: bowler_id,
-                      batsman_id: batsman_id,
-                      wicket_type: wicket_type,
-                      fielder_id: fielder_id)
+    build_wicket(bowler_id: bowler_id,
+                 batsman_id: batsman_id,
+                 wicket_type: wicket_type,
+                 fielder_id: fielder_id)
 
     raise(ActiveRecord::RecordInvalid, wicket) unless wicket.valid?
   end

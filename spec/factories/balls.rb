@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: balls
@@ -17,6 +19,8 @@
 #
 FactoryBot.define do
   factory :ball do
-    
+    score { (0..6).to_a.sample }
+    batsman { FactoryBot.create(:player, team: FactoryBot.create(:team)) }
+    bowler { FactoryBot.create(:player, team: FactoryBot.create(:team)) }
   end
 end

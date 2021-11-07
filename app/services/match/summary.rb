@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Match::Summary
   attr_reader :match,
               :team1,

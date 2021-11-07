@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Users API' do
   path '/api/signup' do
     post 'Creates a user' do
@@ -12,10 +14,10 @@ describe 'Users API' do
               email: { type: :string },
               password: { type: :string }
             },
-            required: [ 'email', 'password' ]
+            required: %w[email password]
           }
         },
-        required: [ 'user' ]
+        required: ['user']
       }
 
       response '200', 'user created' do
@@ -37,7 +39,7 @@ describe 'Users API' do
     let(:Authorization) { auth_headers }
 
     get 'Retrieves a user' do
-      security [ bearerAuth: [] ]
+      security [bearerAuth: []]
       tags 'Users'
       consumes 'application/json'
       produces 'application/json'
@@ -45,17 +47,17 @@ describe 'Users API' do
 
       response '200', 'user found' do
         schema type: :object,
-          properties: {
-            resource: {
-              type: :object,
-              properties: {
-                id: { type: :integer },
-                email: { type: :string }
-              },
-              required: [ 'id', 'email' ]
-            }
-          },
-          required: [ 'resource' ]
+               properties: {
+                 resource: {
+                   type: :object,
+                   properties: {
+                     id: { type: :integer },
+                     email: { type: :string }
+                   },
+                   required: %w[id email]
+                 }
+               },
+               required: ['resource']
 
         run_test!
       end
