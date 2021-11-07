@@ -12,7 +12,6 @@ gem 'puma'
 gem 'rack-cors'
 gem 'rails'
 gem 'jbuilder'
-gem 'rswag'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
@@ -22,6 +21,7 @@ group :development, :test do
   gem 'pry'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'rswag'
 end
 
 group :development do
