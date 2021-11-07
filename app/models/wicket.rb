@@ -6,7 +6,6 @@ class Wicket < ApplicationRecord
   belongs_to :ball
 
   validates :wicket_type, presence: true
-
   validate :batsman_fielder_team, :bowler_fielder_team, if: :fielder_present?
 
   def bowler_name
@@ -29,3 +28,17 @@ class Wicket < ApplicationRecord
     errors.add(:base, "Fielder and bowler should be of same team")
   end
 end
+
+# == Schema Information
+#
+# Table name: wickets
+#
+#  id          :bigint           not null, primary key
+#  wicket_type :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  ball_id     :integer          not null
+#  batsman_id  :integer          not null
+#  bowler_id   :integer          not null
+#  fielder_id  :integer
+#
