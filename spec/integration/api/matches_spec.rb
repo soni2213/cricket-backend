@@ -10,12 +10,12 @@ RSpec.describe 'api/matches', type: :request do
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    post('record_toss match') do
+    post('To record toss winner of match') do
       security [ bearerAuth: [] ]
-      tags 'Matches'
+      tags 'Matches (private)'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :ball, in: :body, schema: {
+      parameter name: :record, in: :body, schema: {
         type: :object,
         properties: {
           toss_winner_id: { type: :integer }
@@ -24,7 +24,7 @@ RSpec.describe 'api/matches', type: :request do
       }
 
       response(204, 'successful') do
-        let(:ball) { { toss_winner_id: match.team1.id } }
+        let(:record) { { toss_winner_id: match.team1.id } }
         run_test!
       end
     end
@@ -39,12 +39,12 @@ RSpec.describe 'api/matches', type: :request do
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    post('record_winner match') do
+    post('To record winner of match') do
       security [ bearerAuth: [] ]
-      tags 'Matches'
+      tags 'Matches (private)'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :ball, in: :body, schema: {
+      parameter name: :record, in: :body, schema: {
         type: :object,
         properties: {
           winner_id: { type: :integer }
@@ -53,46 +53,36 @@ RSpec.describe 'api/matches', type: :request do
       }
 
       response(204, 'successful') do
-        let(:ball) { { winner_id: match.team1.id } }
+        let(:record) { { winner_id: match.team1.id } }
         run_test!
       end
     end
   end
 
-  path '/api/matches/{id}/summary' do
-    let(:team1) { FactoryBot.create(:team, name: 'team1') }
-    let(:team2) { FactoryBot.create(:team, name: 'team2') }
-    let(:match) do
-      FactoryBot.create(:match, toss_winner_id: team1.id, status: :in_progress, team1: team1, team2: team2)
-    end
+  path '/api/matches/{id}/update_match_status' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:match) { FactoryBot.create(:match) }
     let(:id) { match.id }
-
-    let(:team1_players) { FactoryBot.create_list(:player, 11, team: team1) }
-    let(:team2_players) { FactoryBot.create_list(:player, 11, team: team2) }
+    let(:auth_headers) { Devise::JWT::TestHelpers.auth_headers({}, user)['Authorization'] }
+    let(:Authorization) { auth_headers }
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    get('summary match (in progress)') do
-      tags 'public'
+    post('To update status of match') do
+      security [ bearerAuth: [] ]
+      tags 'Matches (private)'
       consumes 'application/json'
       produces 'application/json'
+      parameter name: :record, in: :body, schema: {
+        type: :object,
+        properties: {
+          status: { type: :string }
+        },
+        required: [ 'status' ]
+      }
 
-      response(200, 'successful') do
-        schema type: :object,
-          properties: {
-            resource: {
-              type: :object,
-              properties: {
-                team1: { type: :string },
-                team2: { type: :string }
-              },
-              required: [ 'team1', 'team2' ]
-            }, message: {
-              type: :string
-            }
-          },
-          required: [ 'resource' ]
-
+      response(204, 'successful') do
+        let(:record) { { status: 'completed' } }
         run_test!
       end
     end
@@ -117,8 +107,8 @@ RSpec.describe 'api/matches', type: :request do
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    get('summary match (completed match)') do
-      tags 'public'
+    get('To fetch summary after the game') do
+      tags 'Matches (public)'
       consumes 'application/json'
       produces 'application/json'
 
@@ -144,7 +134,7 @@ RSpec.describe 'api/matches', type: :request do
                       properties: {
                         runs: { type: "integer" },
                         balls_played: { type: "integer" },
-                        wicket_taker: { type: ["null", "string"] }
+                        wicket_taker: { type: "string" }
                       },
                       required: [ 'runs', 'balls_played' ]
                     },
@@ -181,7 +171,7 @@ RSpec.describe 'api/matches', type: :request do
                       properties: {
                         runs: { type: "integer" },
                         balls_played: { type: "integer" },
-                        wicket_taker: { type: ["null", "string"] }
+                        wicket_taker: { type: "string" }
                       },
                       required: [ 'runs', 'balls_played' ]
                     },
@@ -232,9 +222,9 @@ RSpec.describe 'api/matches', type: :request do
     let(:Authorization) { auth_headers }
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
-    post('record_score match') do
+    post('To record a ball') do
       security [ bearerAuth: [] ]
-      tags 'Matches'
+      tags 'Matches (private)'
       consumes 'application/json'
       produces 'application/json'
       parameter name: :ball, in: :body, schema: {

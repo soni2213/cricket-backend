@@ -5,6 +5,421 @@
     "version": "v1"
   },
   "paths": {
+    "/api/matches/{id}/record_toss": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "summary": "To record toss winner of match",
+        "security": [
+          {
+            "bearerAuth": [
+
+            ]
+          }
+        ],
+        "tags": [
+          "Matches (private)"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "204": {
+            "description": "successful"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "toss_winner_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "toss_winner_id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/matches/{id}/record_winner": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "summary": "To record winner of match",
+        "security": [
+          {
+            "bearerAuth": [
+
+            ]
+          }
+        ],
+        "tags": [
+          "Matches (private)"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "204": {
+            "description": "successful"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "winner_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "winner_id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/matches/{id}/update_match_status": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "summary": "To update status of match",
+        "security": [
+          {
+            "bearerAuth": [
+
+            ]
+          }
+        ],
+        "tags": [
+          "Matches (private)"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "204": {
+            "description": "successful"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/matches/{id}/summary": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "summary": "To fetch summary after the game",
+        "tags": [
+          "Matches (public)"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "resource": {
+                      "type": "object",
+                      "properties": {
+                        "brief": {
+                          "type": "object",
+                          "properties": {
+                            "team1": {
+                              "type": "string"
+                            },
+                            "team2": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "team1",
+                            "team2"
+                          ]
+                        },
+                        "team1": {
+                          "type": "object",
+                          "properties": {
+                            "team1Player1": {
+                              "type": "object",
+                              "properties": {
+                                "runs": {
+                                  "type": "integer"
+                                },
+                                "balls_played": {
+                                  "type": "integer"
+                                },
+                                "wicket_taker": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "runs",
+                                "balls_played"
+                              ]
+                            },
+                            "team1Player2": {
+                              "type": "object"
+                            },
+                            "team1Player3": {
+                              "type": "object"
+                            },
+                            "team1Player4": {
+                              "type": "object"
+                            },
+                            "team1Player5": {
+                              "type": "object"
+                            },
+                            "team1Player6": {
+                              "type": "object"
+                            },
+                            "team1Player7": {
+                              "type": "object"
+                            },
+                            "team1Player8": {
+                              "type": "object"
+                            },
+                            "team1Player9": {
+                              "type": "object"
+                            },
+                            "team1Player10": {
+                              "type": "object"
+                            },
+                            "team1Player11": {
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "team1Player1",
+                            "team1Player2",
+                            "team1Player3",
+                            "team1Player4",
+                            "team1Player5",
+                            "team1Player6",
+                            "team1Player7",
+                            "team1Player8",
+                            "team1Player9",
+                            "team1Player10",
+                            "team1Player11"
+                          ]
+                        },
+                        "team2": {
+                          "type": "object",
+                          "properties": {
+                            "team2Player12": {
+                              "type": "object",
+                              "properties": {
+                                "runs": {
+                                  "type": "integer"
+                                },
+                                "balls_played": {
+                                  "type": "integer"
+                                },
+                                "wicket_taker": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "runs",
+                                "balls_played"
+                              ]
+                            },
+                            "team2Player13": {
+                              "type": "object"
+                            },
+                            "team2Player14": {
+                              "type": "object"
+                            },
+                            "team2Player15": {
+                              "type": "object"
+                            },
+                            "team2Player16": {
+                              "type": "object"
+                            },
+                            "team2Player17": {
+                              "type": "object"
+                            },
+                            "team2Player18": {
+                              "type": "object"
+                            },
+                            "team2Player19": {
+                              "type": "object"
+                            },
+                            "team2Player20": {
+                              "type": "object"
+                            },
+                            "team2Player21": {
+                              "type": "object"
+                            },
+                            "team2Player22": {
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "team2Player12",
+                            "team2Player13",
+                            "team2Player14",
+                            "team2Player15",
+                            "team2Player16",
+                            "team2Player17",
+                            "team2Player18",
+                            "team2Player19",
+                            "team2Player20",
+                            "team2Player21",
+                            "team2Player22"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "brief",
+                        "team1",
+                        "team2"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "resource",
+                    "message"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/matches/{id}/record_score": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "summary": "To record a ball",
+        "security": [
+          {
+            "bearerAuth": [
+
+            ]
+          }
+        ],
+        "tags": [
+          "Matches (private)"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "204": {
+            "description": "successful"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bowler_id": {
+                    "type": "integer"
+                  },
+                  "batsman_id": {
+                    "type": "integer"
+                  },
+                  "score": {
+                    "type": "integer"
+                  },
+                  "wicket_type": {
+                    "type": "string"
+                  },
+                  "fielder_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "bowler_id",
+                  "batsman_id",
+                  "score"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/signup": {
       "post": {
         "summary": "Creates a user",

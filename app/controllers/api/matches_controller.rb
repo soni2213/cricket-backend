@@ -17,6 +17,10 @@ module Api
       @match.update!(winner_params)
     end
 
+    def update_match_status
+      @match.update!(status_params)
+    end
+
     def summary
       render_success(resource: Match::Summary.new(@match).print)
     end
@@ -44,6 +48,10 @@ module Api
     def winner_params
       params.permit(:winner_id)
             .merge(status: 'completed')
+    end
+
+    def status_params
+      params.permit(:status)
     end
   end
 end

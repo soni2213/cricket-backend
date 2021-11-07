@@ -9,7 +9,7 @@ November 7, 2021
 https://cricket-score-recorder.herokuapp.com
 
 ### Time spent
-4 hrs
+6 hrs
 
 ### Assumptions made
 1. team winning toss always will bat first.
