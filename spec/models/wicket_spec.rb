@@ -11,6 +11,13 @@
 #  bowler_id   :integer          not null
 #  fielder_id  :integer
 #
+# Indexes
+#
+#  index_wickets_on_ball_id     (ball_id)
+#  index_wickets_on_batsman_id  (batsman_id)
+#  index_wickets_on_bowler_id   (bowler_id)
+#  index_wickets_on_fielder_id  (fielder_id)
+#
 require 'rails_helper'
 
 RSpec.describe Wicket, type: :model do

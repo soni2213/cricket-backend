@@ -3,7 +3,7 @@
 # Table name: players
 #
 #  id         :bigint           not null, primary key
-#  name       :string           default(""), not null
+#  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  team_id    :bigint

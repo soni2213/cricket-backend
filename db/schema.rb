@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_155209) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.string "name", default: "", null: false
+    t.string "name", null: false
     t.bigint "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -55,10 +55,9 @@ ActiveRecord::Schema.define(version: 2021_11_03_155209) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "name", default: "", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_teams_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,6 +79,10 @@ ActiveRecord::Schema.define(version: 2021_11_03_155209) do
     t.integer "fielder_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ball_id"], name: "index_wickets_on_ball_id"
+    t.index ["batsman_id"], name: "index_wickets_on_batsman_id"
+    t.index ["bowler_id"], name: "index_wickets_on_bowler_id"
+    t.index ["fielder_id"], name: "index_wickets_on_fielder_id"
   end
 
 end

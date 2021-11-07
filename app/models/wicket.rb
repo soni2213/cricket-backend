@@ -7,10 +7,13 @@ class Wicket < ApplicationRecord
 
   validates :wicket_type, presence: true
   validate :batsman_fielder_team, :bowler_fielder_team, if: :fielder_present?
+  validate :max_wickets
 
   def bowler_name
     bowler&.name
   end
+
+  private
 
   def fielder_present?
     fielder.present?
@@ -27,6 +30,13 @@ class Wicket < ApplicationRecord
 
     errors.add(:base, "Fielder and bowler should be of same team")
   end
+
+  def max_wickets
+    return unless ball
+    return unless ball.match.wickets.where(batsman_id: batsman.team.player_ids).size >= 10
+
+    errors.add(:batsman, 'Max of 10 wickets per team')
+  end
 end
 
 # == Schema Information
@@ -41,4 +51,11 @@ end
 #  batsman_id  :integer          not null
 #  bowler_id   :integer          not null
 #  fielder_id  :integer
+#
+# Indexes
+#
+#  index_wickets_on_ball_id     (ball_id)
+#  index_wickets_on_batsman_id  (batsman_id)
+#  index_wickets_on_bowler_id   (bowler_id)
+#  index_wickets_on_fielder_id  (fielder_id)
 #

@@ -42,8 +42,8 @@ FactoryBot.create_list(:ball, 6, match: match, bowler_id: team1_players[-3].id, 
 FactoryBot.create_list(:ball, 6, match: match, bowler_id: team1_players[-4].id, batsman_id: team2_players[4].id, score: (0..6).to_a.sample)
 # wickets # only 2
 (0..1).each do |i|
-  ball = FactoryBot.create(:ball, match: match, bowler_id: team2_players[-4].id, batsman_id: team1_players[4].id, score: (0..6).to_a.sample)
-  FactoryBot.create(:wicket, ball: ball, bowler_id: team2_players[-1].id, batsman_id: team1_players[i].id)
+  ball = FactoryBot.create(:ball, match: match, bowler_id: team1_players[-4].id, batsman_id: team2_players[4].id, score: (0..6).to_a.sample)
+  FactoryBot.create(:wicket, ball: ball, bowler_id: team1_players[-1].id, batsman_id: team2_players[i].id)
 end
 
 match.update(winner_id: team2.id)
