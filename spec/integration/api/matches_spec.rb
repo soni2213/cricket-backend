@@ -1,4 +1,4 @@
-require 'swagger_helper'
+# require 'swagger_helper'
 
 RSpec.describe 'api/matches', type: :request do
   path '/api/matches/{id}/record_toss' do
