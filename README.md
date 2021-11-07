@@ -15,7 +15,7 @@ The application is API only, so there ain't any homepage there.
 6 hrs
 
 ### Assumptions made
-1. team winning toss always will bat first.
+1. team winning the toss always will bat first.
 2. there are max of 20 overs per team (configurable as a constant in match model)
 3. match status updates (eg. toss, scheduling, completion etc) are supposed to be handled via specific API calls. No assumption on wickets falling or ball throws are made in codebase.
 4. We are using user auth just for authentication, and are not maintaining the same in database transactions.
@@ -30,8 +30,9 @@ The application is API only, so there ain't any homepage there.
 3. Do a `bundle install`
 4. Seed some data in DB using `bundle exec rake db:create db:migrate db:seed`
 5. Play along with the [postman collection](https://www.getpostman.com/collections/92f716c4fa7fd631d7e1)
-6. run `bundle exec rspec` to run the test suite, and update `swagger` docs.
-7. Swagger documentation could be accessed at `http://localhost:3000/api-docs`
+6. Postman script is configured to update auth token `{{token}}` automatically on user signup and login.
+7. Run `bundle exec rspec` to run the test suite, and update `swagger` docs.
+8. Swagger documentation could be accessed at `http://localhost:3000/api-docs`
 
 ### What did you not include in your solution that you want us to know about
 1. Stretch goals
