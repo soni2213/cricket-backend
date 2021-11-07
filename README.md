@@ -2,6 +2,8 @@
 This application is for recording cricket match scores.
 The Application is built using Ruby On Rails 6, ruby 3.0.1
 
+![ERD](./DatabaseERDiagramCricketScoreRecorder.png)
+
 ### Date
 November 7, 2021
 
