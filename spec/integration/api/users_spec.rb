@@ -32,6 +32,49 @@ describe 'Users API' do
     end
   end
 
+  path '/api/login' do
+    before do
+      FactoryBot.create(:user, email: 'foo@bar.biz', password: 'password')
+    end
+
+    post 'Login a user' do
+      tags 'Users'
+      consumes 'application/json'
+      parameter name: :user, in: :body, schema: {
+        type: :object,
+        properties: {
+          user: {
+            type: :object,
+            properties: {
+              email: { type: :string },
+              password: { type: :string }
+            },
+            required: %w[email password]
+          }
+        },
+        required: ['user']
+      }
+
+      response '200', 'user logs in' do
+        schema type: :object,
+               properties: {
+                 resource: {
+                   type: :object,
+                   properties: {
+                     id: { type: :integer },
+                     email: { type: :string }
+                   },
+                   required: %w[id email]
+                 }
+               },
+               required: ['resource']
+
+        let(:user) { { user: { email: 'foo@bar.biz', password: 'password' } } }
+        run_test!
+      end
+    end
+  end
+
   path '/api/users/{id}' do
     let(:user) { FactoryBot.create(:user) }
     let(:id) { user.id }

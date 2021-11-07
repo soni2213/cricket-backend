@@ -10,7 +10,7 @@ RSpec.describe 'api/matches', type: :request do
     let(:auth_headers) { Devise::JWT::TestHelpers.auth_headers({}, user)['Authorization'] }
     let(:Authorization) { auth_headers }
 
-    post('Create a new match!') do
+    post('Creates a new match!') do
       security [bearerAuth: []]
       tags 'Matches (private)'
       consumes 'application/json'
@@ -41,7 +41,7 @@ RSpec.describe 'api/matches', type: :request do
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    put('To record winner of match') do
+    put('Records winner of match') do
       security [bearerAuth: []]
       tags 'Matches (private)'
       consumes 'application/json'
@@ -70,7 +70,7 @@ RSpec.describe 'api/matches', type: :request do
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    put('To update status of match') do
+    put('Update status of match') do
       security [bearerAuth: []]
       tags 'Matches (private)'
       consumes 'application/json'
@@ -111,8 +111,10 @@ RSpec.describe 'api/matches', type: :request do
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    get('To fetch summary after the game') do
+    get('Fetches summary during and after the game') do
       tags 'Matches (public)'
+      description 'To fetch updates during the game, first hit update_match_status API with `in_progress` status
+                   and for after the game, hit the same API with `completed` status.'
       consumes 'application/json'
       produces 'application/json'
 
@@ -226,7 +228,7 @@ RSpec.describe 'api/matches', type: :request do
     let(:Authorization) { auth_headers }
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
-    post('To record a ball') do
+    post('Records a ball') do
       security [bearerAuth: []]
       tags 'Matches (private)'
       consumes 'application/json'

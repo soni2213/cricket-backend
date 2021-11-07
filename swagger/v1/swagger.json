@@ -7,7 +7,7 @@
   "paths": {
     "/api/matches": {
       "post": {
-        "summary": "Create a new match!",
+        "summary": "Creates a new match!",
         "security": [
           {
             "bearerAuth": [
@@ -66,7 +66,7 @@
         }
       ],
       "put": {
-        "summary": "To record winner of match",
+        "summary": "Records winner of match",
         "security": [
           {
             "bearerAuth": [
@@ -117,7 +117,7 @@
         }
       ],
       "put": {
-        "summary": "To update status of match",
+        "summary": "Update status of match",
         "security": [
           {
             "bearerAuth": [
@@ -168,10 +168,11 @@
         }
       ],
       "get": {
-        "summary": "To fetch summary after the game",
+        "summary": "Fetches summary after the game",
         "tags": [
           "Matches (public)"
         ],
+        "description": "To fetch updates during the game, first hit update_match_status API with `in_progress` status\n                   and for after the game, hit the same API with `completed` status.",
         "responses": {
           "200": {
             "description": "successful",
@@ -365,7 +366,7 @@
         }
       ],
       "post": {
-        "summary": "To record a ball",
+        "summary": "Records a ball",
         "security": [
           {
             "bearerAuth": [
@@ -430,7 +431,7 @@
         }
       ],
       "get": {
-        "summary": "show team",
+        "summary": "Shows a team",
         "security": [
           {
             "bearerAuth": [
@@ -673,6 +674,51 @@
           },
           "422": {
             "description": "invalid request"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "email",
+                      "password"
+                    ]
+                  }
+                },
+                "required": [
+                  "user"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "summary": "Login a user",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "user logs in"
           }
         },
         "requestBody": {

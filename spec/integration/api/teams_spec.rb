@@ -13,7 +13,7 @@ RSpec.describe 'api/teams', type: :request do
 
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    get('show team') do
+    get('Shows a team') do
       security [bearerAuth: []]
       tags 'Teams (private)'
       consumes 'application/json'
